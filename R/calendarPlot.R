@@ -159,6 +159,7 @@ calendarPlot <-
            pollutant = "nox",
            # add by Xiaoyu 2024/04/24
            LB_level = "LB_case",
+           LB_show = 1,
            year = 2003,
            month = 1:12,
            type = "default",
