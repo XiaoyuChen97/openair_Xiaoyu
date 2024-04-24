@@ -338,6 +338,16 @@ calendarPlot <-
       actual_date.mat <- as.vector(apply(actual_date.mat, 1, rev))
       colour.mat <- as.vector(apply(colour.mat, 1, rev))
 
+
+# Make specific dates special colors
+  if (!is.null(LB_show)) {
+    special_color <- "#084594"  # Change to your desired color
+    for (date in Arrival_time_2022$Date) {
+      special_indices <- which(theDates == date)
+      dateColour[special_indices] <- special_color
+    }
+  }
+      
       grid <- data.frame(expand.grid(x = 1:7, y = 1:6))
       results <- tibble(
         x = grid$x,
