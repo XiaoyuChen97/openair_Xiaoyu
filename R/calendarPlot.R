@@ -609,7 +609,8 @@ calendarPlot <-
             col = date.col
           )
 
-          concs <- mydata$value[subscripts]
+          # concs <- mydata$value[subscripts]
+          concs <- mydata$LB_case[subscripts]
 
           ## deal with values above/below threshold
           ids <- seq_along(concs)
