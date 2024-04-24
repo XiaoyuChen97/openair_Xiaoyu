@@ -329,7 +329,7 @@ calendarPlot <-
   if (!is.null(LB_show)) {
     special_color <- "#084594"  # Change to your desired color
     for (date in Arrival_time_2022$Date) {
-      special_indices <- which(theDates == date)
+      special_indices <- days(date)+ pad.start
       dateColour[special_indices] <- special_color
     }
   }
