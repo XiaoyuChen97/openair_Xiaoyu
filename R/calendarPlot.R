@@ -157,6 +157,8 @@
 calendarPlot <-
   function(mydata,
            pollutant = "nox",
+           # add by Xiaoyu 2024/04/24
+           LB_level = "LB_case",
            year = 2003,
            month = 1:12,
            type = "default",
@@ -227,7 +229,7 @@ calendarPlot <-
 
     ## extract variables of interest
     if (annotate %in% c("date", "value")) {
-      vars <- c("date", pollutant)
+      vars <- c("date", pollutant, LB_level)
     }
     if (annotate == "wd") {
       vars <- c("wd", "ws", "date", pollutant)
@@ -610,7 +612,7 @@ calendarPlot <-
           )
 
           # concs <- mydata$value[subscripts]
-          concs <- mydata$LB_case[subscripts]
+          concs <- LB_level$value[subscripts]
 
           ## deal with values above/below threshold
           ids <- seq_along(concs)
