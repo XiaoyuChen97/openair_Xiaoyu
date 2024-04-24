@@ -619,9 +619,9 @@ calendarPlot <-
           the.cols <- rep(col.lim[1], length(ids))
           the.font <- rep(font.lim[1], length(ids))
           the.cex <- rep(cex.lim[1], length(ids))
-          if (!is.null(lim)) {
+          if (!is.null(LB_show)) {
             ## ids where conc is >= lim
-            ids <- which(LB >= lim)
+            ids <- which(LB = LB_show)
             the.cols[ids] <- col.lim[2]
             the.font[ids] <- font.lim[2]
             the.cex[ids] <- cex.lim[2]
