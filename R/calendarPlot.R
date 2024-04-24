@@ -611,17 +611,17 @@ calendarPlot <-
             col = date.col
           )
 
-          # concs <- mydata$value[subscripts]
-          concs <- LB_level$value[subscripts]
+          concs <- mydata$value[subscripts]
+          LB <- LB_level$value[subscripts]
 
           ## deal with values above/below threshold
-          ids <- seq_along(concs)
+          ids <- seq_along(LB)
           the.cols <- rep(col.lim[1], length(ids))
           the.font <- rep(font.lim[1], length(ids))
           the.cex <- rep(cex.lim[1], length(ids))
           if (!is.null(lim)) {
             ## ids where conc is >= lim
-            ids <- which(concs >= lim)
+            ids <- which(LB >= lim)
             the.cols[ids] <- col.lim[2]
             the.font[ids] <- font.lim[2]
             the.cex[ids] <- cex.lim[2]
