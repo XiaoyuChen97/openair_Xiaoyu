@@ -157,9 +157,6 @@
 calendarPlot <-
   function(mydata,
            pollutant = "nox",
-           # add by Xiaoyu 2024/04/24
-           LB_level = "LB_case",
-           LB_show = 1,
            year = 2003,
            month = 1:12,
            type = "default",
@@ -230,7 +227,7 @@ calendarPlot <-
 
     ## extract variables of interest
     if (annotate %in% c("date", "value")) {
-      vars <- c("date", pollutant, "LB_case")
+      vars <- c("date", pollutant)
     }
     if (annotate == "wd") {
       vars <- c("wd", "ws", "date", pollutant)
@@ -339,9 +336,6 @@ calendarPlot <-
       actual_date.mat <- as.vector(apply(actual_date.mat, 1, rev))
       colour.mat <- as.vector(apply(colour.mat, 1, rev))
 
-
-
-      
       grid <- data.frame(expand.grid(x = 1:7, y = 1:6))
       results <- tibble(
         x = grid$x,
@@ -489,20 +483,6 @@ calendarPlot <-
         wd$conc.mat ## actual numerical value (retain for categorical scales)
     }
 
-    if (annotate == "value") {
-      
-
-      LB_level <- baseData %>%
-        group_by(across(type)) %>%
-        do(prepare.grid(., "LB_case")) %>%
-        ungroup()
-
-      
-      LB_level$value <-
-        LB_level$conc.mat ## actual numerical value (retain for categorical scales)
-      
-    }
-
     ## set up scales
 
     ## categorical scales required
@@ -630,16 +610,15 @@ calendarPlot <-
           )
 
           concs <- mydata$value[subscripts]
-          LB <- LB_level$value[subscripts]
 
           ## deal with values above/below threshold
-          ids <- seq_along(LB)
+          ids <- seq_along(concs)
           the.cols <- rep(col.lim[1], length(ids))
           the.font <- rep(font.lim[1], length(ids))
           the.cex <- rep(cex.lim[1], length(ids))
-          if (!is.null(LB_show)) {
+          if (!is.null(lim)) {
             ## ids where conc is >= lim
-            ids <- which(LB == 1)
+            ids <- which(concs >= lim)
             the.cols[ids] <- col.lim[2]
             the.font[ids] <- font.lim[2]
             the.cex[ids] <- cex.lim[2]
