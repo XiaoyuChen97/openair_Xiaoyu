@@ -639,7 +639,7 @@ calendarPlot <-
           the.cex <- rep(cex.lim[1], length(ids))
           if (!is.null(LB_show)) {
             ## ids where conc is >= lim
-            ids <- which(LB == LB_show)
+            ids <- which(LB == 1)
             the.cols[ids] <- col.lim[2]
             the.font[ids] <- font.lim[2]
             the.cex[ids] <- cex.lim[2]
