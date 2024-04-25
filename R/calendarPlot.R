@@ -228,7 +228,7 @@ calendarPlot <-
 
     ## extract variables of interest
     if (annotate %in% c("date", "value")) {
-      vars <- c("date", pollutant, LB_case)
+      vars <- c("date", pollutant, "LB_case")
     }
     if (annotate == "wd") {
       vars <- c("wd", "ws", "date", pollutant)
