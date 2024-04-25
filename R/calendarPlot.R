@@ -488,7 +488,7 @@ calendarPlot <-
 
       LB <- baseData %>%
         group_by(across(type)) %>%
-        do(prepare.grid(., LB_case)) %>%
+        do(prepare.grid(., "LB_case")) %>%
         ungroup()
 
       LB$value <-
