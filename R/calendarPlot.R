@@ -326,14 +326,7 @@ calendarPlot <-
         rep("black", nrow(mydata)),
         rep("grey70", pad.start)
       )
-# Make specific dates special colors
-  if (!is.null(LB_show)) {
-    special_color <- "blue"  # Change to your desired color
-    for (Date_LB in Arrival_time_2022$Date) {
-      special_indices <- rev(as.numeric(format(Date_LB, "%d")))+ daysAtEnd
-      dateColour[special_indices] <- special_color
-    }
-  }
+
       ## convert to matrix
       conc.mat <- matrix(conc, ncol = 7, byrow = TRUE)
       date.mat <- matrix(theDates, ncol = 7, byrow = TRUE)
