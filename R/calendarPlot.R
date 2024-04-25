@@ -157,6 +157,7 @@
 calendarPlot <-
   function(mydata,
            pollutant = "nox",
+           LB_show = 1,
            year = 2003,
            month = 1:12,
            type = "default",
@@ -227,7 +228,7 @@ calendarPlot <-
 
     ## extract variables of interest
     if (annotate %in% c("date", "value")) {
-      vars <- c("date", pollutant)
+      vars <- c("date", pollutant, LB_case)
     }
     if (annotate == "wd") {
       vars <- c("wd", "ws", "date", pollutant)
@@ -482,7 +483,17 @@ calendarPlot <-
       wd$value <-
         wd$conc.mat ## actual numerical value (retain for categorical scales)
     }
+    if (annotate == "value") {
+      
 
+      LB <- baseData %>%
+        group_by(across(type)) %>%
+        do(prepare.grid(., LB_case)) %>%
+        ungroup()
+
+      LB$value <-
+        LB$conc.mat ## actual numerical value (retain for categorical scales)
+    }
     ## set up scales
 
     ## categorical scales required
@@ -610,15 +621,16 @@ calendarPlot <-
           )
 
           concs <- mydata$value[subscripts]
+          LB_signal <- LB$value[subscripts]
 
           ## deal with values above/below threshold
-          ids <- seq_along(concs)
+          ids <- seq_along(LB_signal)
           the.cols <- rep(col.lim[1], length(ids))
           the.font <- rep(font.lim[1], length(ids))
           the.cex <- rep(cex.lim[1], length(ids))
-          if (!is.null(lim)) {
+          if (!is.null(LB_show)) {
             ## ids where conc is >= lim
-            ids <- which(concs >= lim)
+            ids <- which(LB_signal == 1)
             the.cols[ids] <- col.lim[2]
             the.font[ids] <- font.lim[2]
             the.cex[ids] <- cex.lim[2]
