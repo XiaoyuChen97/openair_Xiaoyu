@@ -158,6 +158,7 @@ calendarPlot <-
   function(mydata,
            pollutant = "nox",
            LB_show = 1,
+           LB_level = "LB_case",
            year = 2003,
            month = 1:12,
            type = "default",
@@ -488,7 +489,7 @@ calendarPlot <-
 
       LB <- baseData %>%
         group_by(across(type)) %>%
-        do(prepare.grid(., "LB_case")) %>%
+        do(prepare.grid(., "LB_level")) %>%
         ungroup()
 
       LB$value <-
